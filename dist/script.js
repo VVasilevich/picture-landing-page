@@ -11,7 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 const modals = () => {
   const bindModal = function (triggerSelector, modalSelector, closeSelector) {
-    let closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+    let triggerDelete = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     const trigger = document.querySelectorAll(triggerSelector),
       modal = document.querySelector(modalSelector),
       close = document.querySelector(closeSelector),
@@ -21,6 +21,9 @@ const modals = () => {
       item.addEventListener('click', e => {
         if (e.target) {
           e.preventDefault();
+        }
+        if (triggerDelete) {
+          item.remove();
         }
         windows.forEach(item => {
           item.style.display = 'none';
@@ -39,7 +42,7 @@ const modals = () => {
       document.body.style.marginRight = '0px';
     });
     modal.addEventListener('click', e => {
-      if (e.target === modal && closeClickOverlay) {
+      if (e.target === modal) {
         windows.forEach(item => {
           item.style.display = 'none';
         });
@@ -60,6 +63,7 @@ const modals = () => {
       if (!display) {
         document.querySelector(modalSelector).style.display = 'block';
         document.body.style.overflow = 'hidden';
+        document.body.style.marginRight = `${calcScrollWidth()}px`;
       }
       if (modalTimerID) {
         clearTimeout(modalTimerID);
@@ -79,6 +83,7 @@ const modals = () => {
   };
   bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
   bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+  bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
   // showModalByTime('.popup-consultation', 3000);
 };
 
