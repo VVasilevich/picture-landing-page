@@ -1,6 +1,7 @@
 const forms = (state) => {
   const form = document.querySelectorAll('form'),
-        inputs = document.querySelectorAll('input');
+        inputs = document.querySelectorAll('input'),
+        upload = document.querySelectorAll('[name="upload"]');
 
   const message = {
     loading: 'Загрузка...',
@@ -32,7 +33,21 @@ const forms = (state) => {
     inputs.forEach(item => {
       item.value = '';
     });
+    upload.forEach(item => {
+      item.previousElementSibling.textContent = 'Файл не выбран';
+    });
   };
+
+  upload.forEach(item => {
+    item.addEventListener('input', () => {
+      console.log(item.files[0]);
+      let dots;
+      const arr = item.files[0].name.split('.');
+      arr[0].length > 6 ? dots = '...' : dots = '.';
+      const name = arr[0].substring(0, 5) + dots + arr[1];
+      item.previousElementSibling.textContent = name;
+    });
+  });
 
   form.forEach(item => {
     item.addEventListener('submit', (e) => {
@@ -40,7 +55,7 @@ const forms = (state) => {
 
       let statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
-      item.appendChild(statusMessage);
+      item.parentNode.appendChild(statusMessage);
 
       item.classList.add('animated', 'fadeOutUp');
       setTimeout(() => {
@@ -61,7 +76,7 @@ const forms = (state) => {
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
       let api;
-      item.closest('.popup-design') ? api = path.designer : api = path.consultation;
+      item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.consultation;
       console.log(api);
 
       postData(api, json)
@@ -78,6 +93,9 @@ const forms = (state) => {
           clearInputs();
           setTimeout(() => {
             statusMessage.remove();
+            item.style.display = 'block';
+            item.classList.remove('fadeOutUp');
+            item.classList.add('fadeInUp');
           }, 5000);
         });
     });
