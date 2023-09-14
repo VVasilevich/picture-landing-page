@@ -1,6 +1,7 @@
 const forms = (state) => {
   const form = document.querySelectorAll('form'),
         inputs = document.querySelectorAll('input'),
+        textareas = document.querySelectorAll('textarea'),
         upload = document.querySelectorAll('[name="upload"]');
 
   const message = {
@@ -33,6 +34,9 @@ const forms = (state) => {
     inputs.forEach(item => {
       item.value = '';
     });
+    textareas.forEach(item => {
+      item.value = '';
+    });
     upload.forEach(item => {
       item.previousElementSibling.textContent = 'Файл не выбран';
     });
@@ -40,12 +44,12 @@ const forms = (state) => {
 
   upload.forEach(item => {
     item.addEventListener('input', () => {
-      console.log(item.files[0]);
       let dots;
       const arr = item.files[0].name.split('.');
       arr[0].length > 6 ? dots = '...' : dots = '.';
       const name = arr[0].substring(0, 5) + dots + arr[1];
       item.previousElementSibling.textContent = name;
+      console.log(item.files[0]);
     });
   });
 
@@ -96,7 +100,7 @@ const forms = (state) => {
             item.style.display = 'block';
             item.classList.remove('fadeOutUp');
             item.classList.add('fadeInUp');
-          }, 5000);
+          }, 4000);
         });
     });
   });
