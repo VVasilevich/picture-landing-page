@@ -1,5 +1,11 @@
 const mask = (selector) => {
-  let setCursorPosition = (pos, elem) => {
+  const inputs = document.querySelectorAll(selector);
+
+  const setCursorPosition = (pos, elem) => {
+    elem.addEventListener('click', () => {
+      elem.setSelectionRange(elem.value.length, elem.value.length);
+    });
+
     elem.focus();
 
     if (elem.setSelectionRange) {
@@ -13,6 +19,7 @@ const mask = (selector) => {
       range.select();
     }
   }
+
   function createMask(event) {
     let matrix = '+7 (___) ___-__-__',
         i = 0,
@@ -35,8 +42,6 @@ const mask = (selector) => {
           setCursorPosition(this.value.length, this);
         }
   }
-
-  const inputs = document.querySelectorAll(selector);
 
   inputs.forEach(item => {
     item.addEventListener('input', createMask);

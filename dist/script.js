@@ -136,7 +136,11 @@ const forms = state => {
 
 __webpack_require__.r(__webpack_exports__);
 const mask = selector => {
-  let setCursorPosition = (pos, elem) => {
+  const inputs = document.querySelectorAll(selector);
+  const setCursorPosition = (pos, elem) => {
+    elem.addEventListener('click', () => {
+      elem.setSelectionRange(elem.value.length, elem.value.length);
+    });
     elem.focus();
     if (elem.setSelectionRange) {
       elem.setSelectionRange(pos, pos);
@@ -167,7 +171,6 @@ const mask = selector => {
       setCursorPosition(this.value.length, this);
     }
   }
-  const inputs = document.querySelectorAll(selector);
   inputs.forEach(item => {
     item.addEventListener('input', createMask);
     item.addEventListener('focus', createMask);
