@@ -7,6 +7,11 @@ const checkTextInputs = (selector) => {
         e.preventDefault();
       }
     });
+    item.addEventListener('input', () => {
+      if (item.value.match(/[a-z]/ig)) {
+        item.value = '';
+      }
+    });
   });
 };
 

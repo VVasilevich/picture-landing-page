@@ -17,6 +17,11 @@ const checkTextInputs = selector => {
         e.preventDefault();
       }
     });
+    item.addEventListener('input', () => {
+      if (item.value.match(/[a-z]/ig)) {
+        item.value = '';
+      }
+    });
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (checkTextInputs);
