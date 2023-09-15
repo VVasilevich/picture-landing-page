@@ -1,3 +1,5 @@
+import { postData } from "../services/requests";
+
 const forms = (state) => {
   const form = document.querySelectorAll('form'),
         inputs = document.querySelectorAll('input'),
@@ -16,18 +18,6 @@ const forms = (state) => {
   const path = {
     designer: 'https://jsonplaceholder.typicode.com/posts',
     consultation: 'https://jsonplaceholder.typicode.com/posts'
-  };
-
-  const postData = async (url, data) => {
-    let res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: data
-    });
-
-    return await res.json();
   };
 
   const clearInputs = () => {

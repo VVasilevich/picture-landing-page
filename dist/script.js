@@ -35,6 +35,8 @@ const checkTextInputs = selector => {
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
+
 const forms = state => {
   const form = document.querySelectorAll('form'),
     inputs = document.querySelectorAll('input'),
@@ -51,16 +53,6 @@ const forms = state => {
   const path = {
     designer: 'https://jsonplaceholder.typicode.com/posts',
     consultation: 'https://jsonplaceholder.typicode.com/posts'
-  };
-  const postData = async (url, data) => {
-    let res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: data
-    });
-    return await res.json();
   };
   const clearInputs = () => {
     inputs.forEach(item => {
@@ -105,7 +97,7 @@ const forms = state => {
       let api;
       item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.consultation;
       console.log(api);
-      postData(api, json).then(res => {
+      (0,_services_requests__WEBPACK_IMPORTED_MODULE_0__.postData)(api, json).then(res => {
         console.log(res);
         statusImg.setAttribute('src', message.ok);
         textMessage.textContent = message.success;
@@ -374,6 +366,38 @@ const sliders = (slides, dir, prev, next) => {
 };
 /* harmony default export */ __webpack_exports__["default"] = (sliders);
 
+/***/ }),
+
+/***/ "./src/js/services/requests.js":
+/*!*************************************!*\
+  !*** ./src/js/services/requests.js ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getData: function() { return /* binding */ getData; },
+/* harmony export */   postData: function() { return /* binding */ postData; }
+/* harmony export */ });
+const postData = async (url, data) => {
+  let res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: data
+  });
+  return await res.json();
+};
+const getData = async url => {
+  let res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+  }
+  return await res.json();
+};
+
+
 /***/ })
 
 /******/ 	});
@@ -403,6 +427,23 @@ const sliders = (slides, dir, prev, next) => {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	!function() {
 /******/ 		// define __esModule on exports
