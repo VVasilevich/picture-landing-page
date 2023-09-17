@@ -118,11 +118,13 @@ const filter = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
 
-const forms = state => {
+const forms = () => {
   const form = document.querySelectorAll('form'),
     inputs = document.querySelectorAll('input'),
     textareas = document.querySelectorAll('textarea'),
-    upload = document.querySelectorAll('[name="upload"]');
+    upload = document.querySelectorAll('[name="upload"]'),
+    selects = document.querySelectorAll('select'),
+    totalPrice = document.querySelector('.calc-price');
   const message = {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся.',
@@ -135,7 +137,7 @@ const forms = state => {
     designer: 'https://jsonplaceholder.typicode.com/posts',
     consultation: 'https://jsonplaceholder.typicode.com/posts'
   };
-  const clearInputs = () => {
+  const clearForms = () => {
     inputs.forEach(item => {
       item.value = '';
     });
@@ -145,6 +147,10 @@ const forms = state => {
     upload.forEach(item => {
       item.previousElementSibling.textContent = 'Файл не выбран';
     });
+    selects.forEach(select => {
+      select.selectedIndex = 0;
+    });
+    totalPrice.textContent = 'Для расчета нужно выбрать размер картины и материал картины';
   };
   upload.forEach(item => {
     item.addEventListener('input', () => {
@@ -174,6 +180,10 @@ const forms = state => {
       textMessage.textContent = message.loading;
       statusMessage.appendChild(textMessage);
       const formData = new FormData(item);
+      if (item.classList.contains('calc_form')) {
+        const totalPrice = document.querySelector('.calc-price').textContent;
+        formData.append('price', totalPrice);
+      }
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
       let api;
       item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.consultation;
@@ -186,7 +196,7 @@ const forms = state => {
         statusImg.setAttribute('src', message.fail);
         textMessage.textContent = message.failure;
       }).finally(() => {
-        clearInputs();
+        clearForms();
         setTimeout(() => {
           statusMessage.remove();
           item.style.display = 'block';
