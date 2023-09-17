@@ -73,7 +73,6 @@ const forms = () => {
 
       const formData = new FormData(item);
       
-
       if (item.classList.contains('calc_form')) {
         const totalPrice = document.querySelector('.calc-price').textContent;
         formData.append('price', totalPrice);
