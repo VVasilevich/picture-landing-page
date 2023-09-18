@@ -2,6 +2,38 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+const accordion = triggerSelector => {
+  const btns = document.querySelectorAll(triggerSelector);
+  btns.forEach(btn => {
+    btn.addEventListener('click', function () {
+      btns.forEach(btn => {
+        if (!this.classList.contains('active-style')) {
+          btn.classList.remove('active-style');
+          btn.nextElementSibling.classList.remove('active-content');
+          btn.nextElementSibling.style.maxHeight = '0px';
+        }
+      });
+      this.classList.toggle('active-style');
+      this.nextElementSibling.classList.toggle('active-content');
+      if (this.classList.contains('active-style')) {
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + 'px';
+      } else {
+        this.nextElementSibling.style.maxHeight = '0px';
+      }
+    });
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
 /***/ "./src/js/modules/calc.js":
 /*!********************************!*\
   !*** ./src/js/modules/calc.js ***!
@@ -634,6 +666,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
 /* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
 /* harmony import */ var _modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/pictureSize */ "./src/js/modules/pictureSize.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
 
 
 
@@ -657,6 +691,7 @@ window.addEventListener('DOMContentLoaded', () => {
   (0,_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price');
   (0,_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
   (0,_modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__["default"])('.sizes-block');
+  (0,_modules_accordion__WEBPACK_IMPORTED_MODULE_9__["default"])('.accordion-heading');
 });
 }();
 /******/ })()
