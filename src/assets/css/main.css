@@ -212,6 +212,9 @@ h4 {
 
 }
 .main .file_upload {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
   overflow: hidden;
   font-size: 1em;
@@ -384,6 +387,9 @@ h4 {
   top: -1rem;
   right: -8rem;
 }
+.main-slider {
+  overflow: hidden;
+}
 .slick-slide img {
   max-width: 100%;
 }
@@ -509,11 +515,12 @@ h4 {
   opacity: 0.6;
   font-family: 'Circe Extra Bold', sans-serif;
   margin-left: 4rem;
+  margin-bottom: 1rem;
   appearance: none;
-  border: none;
+  border: 1px solid;
   display: block;
   font-size: 1.9rem;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 .calc .promocode {
   opacity: 0.6;
@@ -523,7 +530,7 @@ h4 {
   border: none;
   display: block;
   font-size: 1.9rem;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 .calc #size {
   margin-top: 3rem;
@@ -547,12 +554,17 @@ h4 {
   text-align: justify;
 }
 .calc .file_upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
   overflow: hidden;
   font-size: 1em;
   /* example */
 
+  width: 19em;
   height: 4em;
+  margin-left: 4rem;
   /* example */
 
   line-height: 2em /* the same as height */
@@ -1160,6 +1172,9 @@ h4 {
   margin-top: 2rem;
 }
 .popup-design .file_upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
   overflow: hidden;
   font-size: 1em;
@@ -1389,6 +1404,9 @@ h4 {
   .promo-2 img {
     right: 0;
   }
+  .feedback-slider {
+    overflow: hidden;
+  }
   .feedback-slider-item {
     padding-bottom: 7rem;
   }
@@ -1456,6 +1474,28 @@ h4 {
   .card-1 .p-heading {
     margin: 2rem 0 3rem 0;
   }
+  form.calc_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .calc .file_upload {
+    margin-left: 0;
+  }
+  .calc select {
+    position: relative;
+    margin-left: 0;
+    text-align: center;
+  }
+  .calc .promocode {
+    margin-left: 0;
+    text-align: center;
+  }
+  .calc .button-transparent {
+    margin: 4rem auto;
+    width: auto;
+  }
   .portfolio-wrapper {
     justify-content: space-around;
   }
@@ -1511,14 +1551,6 @@ h4 {
   }
   .footer .phone-whatsapp {
     margin: 0.5rem 0;
-  }
-  .calc select {
-    position: relative;
-    left: 30%;
-  }
-  .calc .button-transparent {
-    margin: 4rem auto;
-    width: auto;
   }
 }
 @media (max-width: 767px) {
